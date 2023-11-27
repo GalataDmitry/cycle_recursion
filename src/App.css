@@ -12,11 +12,12 @@
   background-color: grey;
   height: 40px;
   width: 120px;
-  border: 1px dashed black;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
 }
 .main_node.add_btn {
   margin-left: 10px;
@@ -27,30 +28,94 @@
   border-radius: 50%;
   background-color: grey;
 }
-.main_node_wrapper{
+.main_node_wrapper {
+  /*position: relative;*/
   display: flex;
   align-items: center;
   justify-content: center;
   /*flex-direction: column;*/
 }
+/*.wrap {*/
+/*  position: relative;*/
+/*  width: 200px;*/
+/*  height: 200px;*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*}*/
+/*.left {*/
+/*  background-color: red;*/
+/*  width: 2px;*/
+/*  height: 15px;*/
+/*  !*position: absolute;*!*/
+/*}*/
+/*.right {*/
+/*  background-color: red;*/
+/*  width: 2px;*/
+/*  height: 15px;*/
+/*  !*position: absolute;*!*/
+/*}*/
+
 .sub_node_container {
+  /*position: relative;*/
   display: flex;
-  border: 1px solid red;
-  /*flex-direction: column;*/
   justify-content: center;
   align-items: center;
+  /*border: 1px solid green;*/
+
 }
 .sub_node_created {
+  position: relative;
   background-color: grey;
   height: 40px;
   width: 120px;
-  border: 1px dashed black;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+.top_line {
+  position: absolute;
+  top: 100%;
+  left: 49%; /* Позиция в центре блока */
+  width: 2px; /* Ширина линии */
+  height: 15px; /* Длина линии */
+  background-color: #000; /* Цвет линии */
+  transform: translateY(-364%);
+}
+.bottom_line {
+  position: absolute;
+  top: 100%;
+  left: 50%; /* Позиция в центре блока */
+  width: 2px; /* Ширина линии */
+  height: 15.5px; /* Длина линии */
+  background-color: #000; /* Ц4ет линии */
+  transform: translateX(-50%);
+}
+.line {
+  content: '';
+  position: absolute;
+  /*top: 15px;*/
+  height: 2px;
+  background-color: black;
+}
+.sub_node_creating {
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: none;
+  font: inherit;
+  background-color: grey;
+  height: 38px;
+  width: 116px;
+  text-align: center;
+}
+.created_line_wrapper {
+  position: relative;
+}
 .sub_node_wrapper {
+  height: 100px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -59,7 +124,12 @@
   display: flex;
 }
 .sub_node_elements {
+  margin-left: 1px;
+  margin-right: 1px;
+  /*border: 1px solid black;*/
+  width: 240px;
+  margin-top: 30px;
   display: flex;
-  /*justify-content: center;*/
+  justify-content: start;
   align-items: center;
 }

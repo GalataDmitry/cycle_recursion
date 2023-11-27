@@ -17,14 +17,20 @@ interface StartSizeTypes {
 export interface SubTypes {
     name: string
     created: boolean
+    updating: boolean
     id: number
+    line_id: number
+    container_id: number
     sub: SubTypes[] | null
 }
 
 export interface SubElementsTypes {
     name: string
     created: boolean
+    updating: boolean
     id: number
+    line_id: number
+    container_id: number
     sub: SubTypes[] | null
 }
 
@@ -40,8 +46,58 @@ function App() {
     const [startPosition, setStartPosition] = useState<StartPositionTypes>({x: null, y: null, change: true})
     const [startSize, setStartSize] = useState<StartSizeTypes>({width: null, height: null, change: true})
     const [subElements, setSubElements] = useState<SubElementsTypes[]>([])
-    // console.log('SUB APP', subElements)
+
+    // const div1 = document.getElementById('div1');
+    // const div2 = document.getElementById('div2');
+    // const line = document.getElementById('line');
+    //
+    // const top1 = div1!?.offsetTop;
+    // const top2 = div2!?.offsetTop;
+    //
+    // const left1 = div1!?.offsetLeft + div1!?.offsetWidth / 2 ;
+    // const left2 = div2!?.offsetLeft + div2!?.offsetWidth / 2;
+    //
+    // line!.style.width = Math.sqrt((top2 - top1) ** 2 + (left2 - left1) ** 2) + 'px';
+    // // line!.style.transform = `rotate(${Math.atan2(top2 - top1, left2 - left1)}rad)`;
+    // line!.style.top = top1 - 0.5 + 'px';
+    // line!.style.left = left1 + 'px';
+
+    // const line = document.getElementById('line');
+    //
+    // const div1 = document.getElementById('div1');
+    // const div2 = document.getElementById('div2');
+    // if (line && div1 && div2) {
+    //
+    //     const rect1 = div1!?.getBoundingClientRect();
+    //     const rect2 = div2!?.getBoundingClientRect();
+    //
+    //     const top1 = rect1!?.top + window.pageYOffset;
+    //     const top2 = rect2!?.top + window.pageYOffset;
+    //     const left1 = rect1!?.left + window.pageXOffset + rect1!?.width / 2;
+    //     const left2 = rect2!?.left + window.pageXOffset + rect2!?.width / 2;
+    //
+    //     const width = Math.sqrt((top2 - top1) ** 2 + (left2 - left1) ** 2);
+    //
+    //     line!.style.width = width + 'px';
+    //     // line!.style.top = (top1 < top2 ? top1 : top2) + 'px';
+    //     line!.style.top = top1 + 'px';
+    //     // line!.style.left = (left1 < left2 ? left1 : left2) + 'px';
+    //     // line.style.transformOrigin = '50% 100%'
+    //     line!.style.left = left1 + 'px';
+    //     // line!.style.transform = `rotate(${Math.atan2(top2 - top1, left2 - left1)}rad)`
+    // }
+
+
     return <>
+
+
+        {/*<div className='wrap'>*/}
+        {/*    <div className='left' id='div1'/>*/}
+        
+        {/*    <div className='right' id='div2'/>*/}
+        
+        {/*    <div className="line" id="line"/>*/}
+        {/*</div>*/}
         <button
             onClick={() => {
                 const elem = document.getElementById('draggable')
@@ -124,7 +180,10 @@ function App() {
                         onClick={() => setSubElements([...subElements, {
                             name: '',
                             created: false,
+                            updating: false,
                             id: Math.random(),
+                            line_id: Math.random(),
+                            container_id: Math.random(),
                             sub: null
                         }])}
                         className='main_node add_btn'
@@ -133,7 +192,7 @@ function App() {
                 </div>
                 <div className='sub_node_container'>
                     {subElements.map((el, index) => {
-                        return <RecursiveNode key={index} el={el} sub={subElements} setSub={setSubElements}/>
+                        return <RecursiveNode key={index} el={el} nodes={subElements} setSub={setSubElements}/>
                     })}
                 </div>
             </div>
@@ -141,4 +200,4 @@ function App() {
     </>
 }
 
-export default App;
+export default App
