@@ -4,7 +4,7 @@
   "private": true,
   "husky": {
     "hooks": {
-      "pre-commit": "npm run prettier"
+      "pre-push": "npm run prettier"
     }
   },
   "lint-staged": {
