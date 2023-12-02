@@ -1,5 +1,5 @@
-import {SubElementsTypes, SubTypes} from "./App"
-import {Dispatch, ReactNode, SetStateAction, useEffect, useState} from "react"
+import { SubElementsTypes, SubTypes} from './App';
+import {Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
 
 interface RecursiveNodeTypes {
     el: SubElementsTypes
@@ -11,12 +11,16 @@ const RecursiveNode = ({el, nodes, setSub}: RecursiveNodeTypes) => {
     // console.log('ALL TREE PROPS SUB', nodes)
     const currentContainer = document.getElementById(`${el.container_id}`)
     if (currentContainer) console.log(currentContainer!.style.top)
-    if (currentContainer && currentContainer!.style.position === 'relative' && currentContainer!.style.top !== '') currentContainer!.style.position = 'static'
+    if (
+        currentContainer &&
+        currentContainer!.style.position === 'relative' &&
+        currentContainer!.style.top !== ''
+    )
+        currentContainer!.style.position = 'static'
 
     const [name, setName] = useState('')
 
     const addUpdateSubElement = (sub: SubElementsTypes[], elemId: number, upd?: boolean) => {
-
         for (let elems of sub) {
             if (elems.id === elemId) {
                 if (upd) {
@@ -47,29 +51,35 @@ const RecursiveNode = ({el, nodes, setSub}: RecursiveNodeTypes) => {
     const createEmptyElement = (sub: SubElementsTypes[], elemId: number) => {
         for (let elems of sub) {
             if (elems.id === elemId) {
-                if (!elems.sub) elems.sub = [{
-                    name: '',
-                    created: false,
-                    updating: false,
-                    id: Math.random(),
-                    line_id: Math.random(),
-                    container_id: Math.random(),
-                    sub: null
-                }]
-                else elems.sub = [...elems.sub, {
-                    name: '',
-                    created: false,
-                    updating: false,
-                    id: Math.random(),
-                    line_id: Math.random(),
-                    container_id: Math.random(),
-                    sub: null
-                }]
+                if (!elems.sub)
+                    elems.sub = [
+                        {
+                            name: '',
+                            created: false,
+                            updating: false,
+                            id: Math.random(),
+                            line_id: Math.random(),
+                            container_id: Math.random(),
+                            sub: null
+                        }
+                    ]
+                else
+                    elems.sub = [
+                        ...elems.sub,
+                        {
+                            name: '',
+                            created: false,
+                            updating: false,
+                            id: Math.random(),
+                            line_id: Math.random(),
+                            container_id: Math.random(),
+                            sub: null
+                        }
+                    ]
             } else if (elems.sub) createEmptyElement(elems.sub, elemId)
         }
         setSub(prev => [...prev])
     }
-
 
     const setLine = (sub: SubElementsTypes[], containerId: number, lineId: number) => {
         for (let elems of sub) {
@@ -119,7 +129,6 @@ const RecursiveNode = ({el, nodes, setSub}: RecursiveNodeTypes) => {
                     line!.style.left = leftOffset + 'px'
                     line!.style.top = topOffset + 'px'
                     // container!.style.border = '1px solid red'
-
                 } else if (elems.sub) setLine(elems.sub, containerId, lineId)
             }
         }
@@ -183,60 +192,84 @@ const RecursiveNode = ({el, nodes, setSub}: RecursiveNodeTypes) => {
     // }, [nodes])
 
     if (el.created) {
-        return <div className='sub_node_wrapper'>
-            <div className='sub_node_elements'>
-                <div className='sub_node_created'>
-                    {el.name}
-                    <div id={`${el.id}`} className='top_line'></div>
-                    <div className={el.sub ? 'bottom_line' : ''}></div>
+        return (
+            <div className='sub_node_wrapper'>
+                <div className='sub_node_elements'>
+                    <div className='sub_node_created'>
+                        {el.name}
+                        <div id={`${el.id}`} className='top_line'></div>
+                        <div className={el.sub ? 'bottom_line' : ''}></div>
+                    </div>
+                    <button
+                        className='main_node add_btn'
+                        onClick={createEmptyElement.bind(null, nodes, el.id)}>
+                        +
+                    </button>
+                    <button
+                        className='main_node add_btn'
+                        onClick={addUpdateSubElement.bind(null, nodes, el.id, true)}>
+                        \
+                    </button>
+                    <button
+                        className='main_node add_btn'
+                        onClick={removeSubElement.bind(null, nodes, el.id, el)}>
+                        -
+                    </button>
                 </div>
-                <button
-                    className='main_node add_btn'
-                    onClick={createEmptyElement.bind(null, nodes, el.id)}>
-                    +
-                </button>
-                <button
-                    className='main_node add_btn'
-                    onClick={addUpdateSubElement.bind(null, nodes, el.id, true)}>
-                    \
-                </button>
-                <button
-                    className='main_node add_btn'
-                    onClick={removeSubElement.bind(null, nodes, el.id, el)}>
-                    -
-                </button>
+                <div id={`${el.container_id}`} className='sub_node_container'>
+                    <div className='line' id={`${el.line_id}`} />
+                    {el.sub &&
+                        el.sub.map((subEl, subIndex) => {
+                            return (
+                                <RecursiveNode
+                                    key={subIndex}
+                                    el={subEl}
+                                    nodes={nodes}
+                                    setSub={setSub}
+                                />
+                            )
+                        })}
+                </div>
             </div>
-            <div id={`${el.container_id}`} className='sub_node_container'>
-                <div className='line' id={`${el.line_id}`}/>
-                {el.sub && el.sub.map((subEl, subIndex) => {
-                    return <RecursiveNode key={subIndex} el={subEl} nodes={nodes} setSub={setSub}/>
-                })}
-            </div>
-        </div>
+        )
     } else {
-        return <div className='sub_node_wrapper'>
-            <div className='sub_node_elements'>
-                <div className='created_line_wrapper'>
-                    <input autoFocus className='sub_node_creating' value={name}
-                           onChange={(e) => setName(e.target.value)}/>
-                    <div id={`${el.id}`} className='top_line'></div>
-                </div>
+        return (
+            <div className='sub_node_wrapper'>
+                <div className='sub_node_elements'>
+                    <div className='created_line_wrapper'>
+                        <input
+                            autoFocus
+                            className='sub_node_creating'
+                            value={name}
+                            onChange={e => setName(e.target.value)}
+                        />
+                        <div id={`${el.id}`} className='top_line'></div>
+                    </div>
 
-                <button
-                    className='main_node add_btn'
-                    onClick={removeSubElement.bind(null, nodes, el.id, el)}
-                >-
-                </button>
-                <button
-                    className='main_node add_btn'
-                    onClick={addUpdateSubElement.bind(null, nodes, el.id, false)}
-                >+
-                </button>
+                    <button
+                        className='main_node add_btn'
+                        onClick={removeSubElement.bind(null, nodes, el.id, el)}>
+                        -
+                    </button>
+                    <button
+                        className='main_node add_btn'
+                        onClick={addUpdateSubElement.bind(null, nodes, el.id, false)}>
+                        +
+                    </button>
+                </div>
+                {el.sub &&
+                    el.sub.map((subEl, subIndex) => {
+                        return (
+                            <RecursiveNode
+                                key={subIndex}
+                                el={subEl}
+                                nodes={nodes}
+                                setSub={setSub}
+                            />
+                        )
+                    })}
             </div>
-            {el.sub && el.sub.map((subEl, subIndex) => {
-                return <RecursiveNode key={subIndex} el={subEl} nodes={nodes} setSub={setSub}/>
-            })}
-        </div>
+        )
     }
 }
 
