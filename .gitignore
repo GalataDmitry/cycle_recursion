@@ -6,7 +6,7 @@
 .pnp.js
 
 .prettierrc.json
-
+.husky
 
 # testing
 /coverage
