@@ -4,24 +4,13 @@
   "private": true,
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": ["lint-staged", "git add"]
     }
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,css,scss}": [
       "prettier --write"
     ]
-  },
-  "prettier": {
-    "trailingComma": "none",
-    "tabWidth": 4,
-    "semi": false,
-    "singleQuote": true,
-    "printWidth": 100,
-    "jsxSingleQuote": true,
-    "bracketSpacing": true,
-    "bracketSameLine": true,
-    "arrowParens": "avoid"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -37,7 +26,7 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "lint-staged": "lint-staged",
+    "lint-staged": "npx lint-staged",
     "prettier": "prettier . --write",
     "start": "react-scripts start",
     "build": "react-scripts build",
