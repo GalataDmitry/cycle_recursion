@@ -8,9 +8,8 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx,css,scss}": [
-      "prettier --write"
-    ]
+    "*.{ts,tsx,css,scss}": "prettier --write"
+
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
