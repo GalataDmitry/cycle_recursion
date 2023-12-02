@@ -37,6 +37,7 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
+    "lint-staged": "npx lint-staged",
     "prettier": "prettier . --write",
     "start": "react-scripts start",
     "build": "react-scripts build",
