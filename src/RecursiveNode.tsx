@@ -1,5 +1,5 @@
-import { SubElementsTypes, SubTypes} from './App';
-import {     Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
+import { SubElementsTypes, SubTypes         } from './App'
+import {Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
 
 interface RecursiveNodeTypes {
     el: SubElementsTypes
@@ -7,7 +7,7 @@ interface RecursiveNodeTypes {
     setSub: Dispatch<SetStateAction<SubElementsTypes[]>>
 }
 
-const RecursiveNode = ({el, nodes, setSub}: RecursiveNodeTypes) => {
+const RecursiveNode = ({ el, nodes, setSub }: RecursiveNodeTypes) => {
     // console.log('ALL TREE PROPS SUB', nodes)
     const currentContainer = document.getElementById(`${el.container_id}`)
     if (currentContainer) console.log(currentContainer!.style.top)
