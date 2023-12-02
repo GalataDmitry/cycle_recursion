@@ -7,7 +7,7 @@ interface RecursiveNodeTypes {
     setSub: Dispatch<SetStateAction<SubElementsTypes[]>>
 }
 
-const RecursiveNode = ({     el, nodes, setSub }: RecursiveNodeTypes) => {
+const RecursiveNode = ({  el, nodes, setSub }: RecursiveNodeTypes) => {
     // console.log('ALL TREE PROPS SUB', nodes)
     const currentContainer = document.getElementById(`${el.container_id}`)
     if (currentContainer) console.log(currentContainer!.style.top)
