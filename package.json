@@ -4,11 +4,13 @@
   "private": true,
   "husky": {
     "hooks": {
-      "pre-push": "lint-staged"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx,css,scss}": "prettier --write"
+    "src/**/*.{ts,tsx,css,scss}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
