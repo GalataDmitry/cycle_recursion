@@ -4,12 +4,12 @@
   "private": true,
   "husky": {
     "hooks": {
-      "pre-push": "lint-staged"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,css,scss}": [
-      "prettier --write"
+      "prettier . --write"
     ]
   },
   "prettier": {
