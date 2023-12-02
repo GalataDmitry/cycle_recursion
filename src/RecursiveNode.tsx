@@ -1,5 +1,5 @@
-import { SubElementsTypes, SubTypes   } from './App'
-import {       Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
+import { SubElementsTypes, SubTypes                } from './App'
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
 
 interface RecursiveNodeTypes {
     el: SubElementsTypes
